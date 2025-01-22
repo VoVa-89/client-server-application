@@ -1,8 +1,10 @@
 <IfModule mod_rewrite.c>
 RewriteEngine on
 RewriteBase /
-RewriteCond %{REQUEST_FILENAME} !-f ; предотвращаем чтение файлов через адресную строку
-RewriteCond %{REQUEST_FILENAME} !-d ;  предотвращаем чтение директорий через адресную строку
-RewriteRule (.*) /index.php?method=%{REQUEST_METHOD}&page=$1 [QSA,L] ; эта строка творит основную магию, она перенаправляет все запросы на наш index.php файл, 
-; куда в query-параметры подставляет метод запроса в поле method=, а в поле page= подставляет страницу, к которой мы обращались
+#предотвращаем чтение файлов через адресную строку
+RewriteCond %{REQUEST_FILENAME} !-f
+#предотвращаем чтение директорий через адресную строку
+RewriteCond %{REQUEST_FILENAME} !-d
+#эта строка творит основную магию, она перенаправляет все запросы на наш index.php файл, куда в query-параметры подставляет метод запроса в поле method=, а в поле page= подставляет страницу, к которой мы обращались
+RewriteRule (.*) /index.php?method=%{REQUEST_METHOD}&page=$1 [QSA,L]
 </IfModule>
