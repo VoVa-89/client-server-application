@@ -1,11 +1,11 @@
 import React from 'react';
 
-const UserCard = (props) => (
+const UsersCard = (props) => (
     <div>
-      <h3>Логин: {props.login}</h3>
-      <h5>Имя: {props.name}</h5>
-      <p>Пароль: {props.password}</p>
+      <h2>Логин: {props.Login}</h2>
+      <h2>Имя: {props.Name}</h2>
+      <h2>Пароль: {props.Password}</h2>
     </div>
 );
 
-export default UserCard;
+export default UsersCard;

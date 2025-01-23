@@ -14,6 +14,8 @@ import MainPage from './components/MainPage'; //функция
 import NewsList from './components/NewsList'; // класс
 import NewsPage from './components/NewsPage'; //функция
 import NewsAdd from './components/NewsAdd'; // класс
+import UsersAdd from './components/UsersAdd';
+import UsersPage from './components/UsersPage';
 
 import UsersList from './components/UsersList'; // Класс
 import './App.css';
