@@ -68,6 +68,37 @@ class App extends Component { // наш класс
     return <NewsPage newsData={newsData} />
   }
 
+
+
+  addUsersCallback = (newUsers) => { //чтобы не делать дополнительный запрос на сервер, этот метод добавит в хранилище добавленного user из компонента UsersAdd.
+    const { usersList } = this.state;
+    this.setState({ newsList: [...usersList, newUsers] });
+  }
+
+  deleteUsersHandler = (id) => () => { //метод, который делает запрос на сервер, чтобы удалить новость по её id и удаляет эту Users из локального хранилища (this.state.usersList).
+    const requestUrl = apiUrl + apiRoutes.users + `?id=${id}`;
+    const { userList } = this.state;
+    console.log('deleteUsersHandler requestUrl', requestUrl);
+
+    fetch(requestUrl, { method: 'DELETE' })
+      .then(res => {
+        const { status } = res;
+
+        if (status < 200 || status > 299) {
+          throw new Error(`Ошибка при удалении! Код: ${status}`);
+        }
+
+        const cleanUsersList = UsersList.filter(users => users.id !== id);
+        this.setState({ usersList: cleanUsersList });
+
+        alert(`Автор с id: ${id} удален!`);
+      })
+      .catch(error => {
+        console.log('catch error');
+        console.error(error);
+      });
+  }
+
   addNewsCallback = (newNews) => { //чтобы не делать дополнительный запрос на сервер, этот метод добавит в хранилище добавленную новость из компонента NewsAdd.
     const { newsList } = this.state;
     this.setState({ newsList: [...newsList, newNews] });
@@ -124,10 +155,14 @@ class App extends Component { // наш класс
                 <MainPage />
               </Route>
 
-              <Route exact path={apiRoutes.users}>
-                <UsersList loadUsers={this.loadUsers} usersList={usersList} />
+              <Route exact path={apiRoutes.users + '/add'}>
+                <UsersAdd addUsersCallback={this.addUsersCallback} />
               </Route>
 
+              <Route exact path={apiRoutes.users}>
+                <UsersList loadUsers={this.loadUsers} deleteUsersHandler={this.deleteUsersHandler} usersList={usersList} />
+              </Route>
+              
               <Route exact path={apiRoutes.news}>
                 <NewsList loadNews={this.loadNews} deleteNewsHandler={this.deleteNewsHandler} newsList={newsList} />
               </Route>

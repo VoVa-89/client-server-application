@@ -81,7 +81,7 @@ class UsersAdd extends Component {
 
 
                 <label className="App-label">
-                    Заголовок:
+                    Пользователь:
                     <input
                         className="App-input-field"
                         name="Login"
@@ -113,9 +113,19 @@ class UsersAdd extends Component {
                     />
                 </label>
 
-                <button type="submit">
-                    Добавить
-                </button>
+                <button 
+                type="submit"
+                backgroundColor={
+                    Login.length < 3      ?
+                    "rgb(229, 229, 229)":
+                    Name.length < 3  ?
+                    "rgb(229, 229, 229)":
+                    Password < 3?
+                    "rgb(229, 229, 229)":
+                    "rgb(176, 243, 71)"
+                }
+                // onClick={validation}
+                > Добавить </button>
             </form>
         );
     }
