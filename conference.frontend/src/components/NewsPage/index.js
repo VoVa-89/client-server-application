@@ -1,3 +1,5 @@
+//Функциональный компонент, принимает данные новости в поле props.newsData - title, author, text. Возвращает разметку новости.
+
 import React from 'react';
 
 const NewsPage = (props) => (

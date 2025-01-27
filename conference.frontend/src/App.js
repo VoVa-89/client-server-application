@@ -14,8 +14,7 @@ import MainPage from './components/MainPage'; //функция
 import NewsList from './components/NewsList'; // класс
 import NewsPage from './components/NewsPage'; //функция
 import NewsAdd from './components/NewsAdd'; // класс
-import UsersAdd from './components/UsersAdd';
-import UsersPage from './components/UsersPage';
+import UsersAdd from './components/UsersAdd'; // класс
 
 import UsersList from './components/UsersList'; // Класс
 import './App.css';
@@ -67,18 +66,17 @@ class App extends Component { // наш класс
 
     return <NewsPage newsData={newsData} />
   }
+  ///////////////////Добавление и удаление пользователей////////////////////////////////////
 
-
-
-  addUsersCallback = (newUsers) => { //чтобы не делать дополнительный запрос на сервер, этот метод добавит в хранилище добавленного user из компонента UsersAdd.
+  addUsersCallback = (newUsers) => { //чтобы не делать дополнительный запрос на сервер, этот метод добавит в хранилище добавленную юзера из компонента UsersAdd.
     const { usersList } = this.state;
-    this.setState({ newsList: [...usersList, newUsers] });
+    this.setState({ usersList: [...usersList, newUsers] });
   }
 
-  deleteUsersHandler = (id) => () => { //метод, который делает запрос на сервер, чтобы удалить новость по её id и удаляет эту Users из локального хранилища (this.state.usersList).
+  deleteUsersHandler = (id) => () => { //метод, который делает запрос на сервер, чтобы удалить пользователя по его id и удаляет этого пользователя из локального хранилища (this.state.usersList).
     const requestUrl = apiUrl + apiRoutes.users + `?id=${id}`;
-    const { userList } = this.state;
-    console.log('deleteUsersHandler requestUrl', requestUrl);
+    const { usersList } = this.state;
+    console.log('deleteNewsHandler requestUrl', requestUrl);
 
     fetch(requestUrl, { method: 'DELETE' })
       .then(res => {
@@ -88,16 +86,17 @@ class App extends Component { // наш класс
           throw new Error(`Ошибка при удалении! Код: ${status}`);
         }
 
-        const cleanUsersList = UsersList.filter(users => users.id !== id);
+        const cleanUsersList = usersList.filter(users => users.id !== id);
         this.setState({ usersList: cleanUsersList });
 
-        alert(`Автор с id: ${id} удален!`);
+        alert(`Пользователь с id: ${id} удалена!`);
       })
       .catch(error => {
         console.log('catch error');
         console.error(error);
       });
   }
+  //////////////////////////////////////////////////////////
 
   addNewsCallback = (newNews) => { //чтобы не делать дополнительный запрос на сервер, этот метод добавит в хранилище добавленную новость из компонента NewsAdd.
     const { newsList } = this.state;
@@ -151,26 +150,33 @@ class App extends Component { // наш класс
             <Switch>
               {/* сами роуты. */}
               {/* Роуты будут "срабатывать" в зависимости от изменения URL в приложении и показывать на странице тот или иной компонент, в зависимости от настройке. */}
+
+              {/* Главная страница - компонент MainPage . Отображается "как есть". */}
               <Route exact path='/'>
                 <MainPage />
               </Route>
 
+              {/* Список пользователей - при отображении загружает список пользователей с сервера, если переданный список пуст. */}
+              <Route exact path={apiRoutes.users}>
+                <UsersList loadUsers={this.loadUsers} deleteUsersHandler={this.deleteUsersHandler} usersList={usersList} />
+              </Route>
+
+              {/* Добавление нового пользователя - добавляет пользователя на сервер. При успешном ответе сервера, добавляет нового пользователя в локальный список. */}
               <Route exact path={apiRoutes.users + '/add'}>
                 <UsersAdd addUsersCallback={this.addUsersCallback} />
               </Route>
 
-              <Route exact path={apiRoutes.users}>
-                <UsersList loadUsers={this.loadUsers} deleteUsersHandler={this.deleteUsersHandler} usersList={usersList} />
-              </Route>
-              
+              {/* Список новостей - работает аналогично со списком пользователей, умеет удалять новости. */}
               <Route exact path={apiRoutes.news}>
                 <NewsList loadNews={this.loadNews} deleteNewsHandler={this.deleteNewsHandler} newsList={newsList} />
               </Route>
 
+              {/* Добавление новой новости - добавляет новость на сервер. При успешном ответе сервера, добавляет новую новость в локальный список. */}
               <Route exact path={apiRoutes.news + '/add'}>
                 <NewsAdd addNewsCallback={this.addNewsCallback} />
               </Route>
 
+              {/* Чтение новости - смотрит на id в строке запроса и отображает нужную новость из списка */}
               <Route exact path={apiRoutes.news + '/:id'} component={this.renderSingleNews} />
 
             </Switch>
