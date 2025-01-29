@@ -43,7 +43,6 @@ class UsersAdd extends Component {
         this.setState({ [name]: value });
         //Метод render() вызывается каждый раз, когда вызывается метод this.setState()
         //что заставляет компонент перерисовываться!
-
         //Будьте с этим аккуратнее и не допускайте бесконечных циклов перерисовки!
     }
 
@@ -75,7 +74,7 @@ class UsersAdd extends Component {
                     login: '',
                     name: '',
                     password: '',
-                    messages: 'Пользователь успешно добавлена!',
+                    messages: 'Пользователь успешно добавлен!',
                     error: '',
                 });
             })
@@ -87,7 +86,8 @@ class UsersAdd extends Component {
 
     render() {
         const { login, name, password, messages, error } = this.state;
-
+        // const Head = (props) => {
+        // const {action} = props
         return (
             <form onSubmit={this.onSubmitHandler}>
 
@@ -112,6 +112,7 @@ class UsersAdd extends Component {
                         placeholder="Логин"
                         onChange={this.onChangeHandler}
                         value={login}
+                       
                     />
                 </label>
 
@@ -139,19 +140,19 @@ class UsersAdd extends Component {
 
                 <button 
                 type="submit"
-                style={{"background-color": login.length < 3       ?
+                    style={{"background-color": login.length < 3       ?
                     "rgb(229, 229, 229)" :
                     name.length < 3  ?
                     "rgb(229, 229, 229)" :
                     password.length < 3    ?
                     "rgb(229, 229, 229)" :
                     "rgb(176, 243, 71)"}}
-                // onClick={validation}
-                > Добавить </button>
 
-                
+                > Добавить </button>
+  
             </form>
         );
+    
     }
 }
 

@@ -133,7 +133,7 @@ class App extends Component { // наш класс
     return (  //возвращаем html-разметку приложения, где есть хедер
       <div>
         <header className="App-header">
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">Welcome to our company "Horns and Hooves"</h1>
         </header>
 
         {/* происходит настройка роутинга. */}

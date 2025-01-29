@@ -138,7 +138,17 @@ class NewsAdd extends Component {
                     />
                 </label>
 
-                <button type="submit">
+                <button
+                 type="submit"
+                 style={{"background-color":
+                    title.length < 3       ?
+                    "rgb(229, 229, 229)" :
+                    author.length < 3  ?
+                    "rgb(229, 229, 229)" :
+                    text.length < 3    ?
+                    "rgb(229, 229, 229)" :
+                    "rgb(176, 243, 71)"}}
+>
                     Добавить
                 </button>
             </form>
