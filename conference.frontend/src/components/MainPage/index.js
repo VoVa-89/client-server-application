@@ -8,15 +8,16 @@ import { apiUrl, apiRoutes } from '../../apiConfig';
 
 const MainPage = () => (
     <div>
-        <h1>Добро пожаловать в наше приложение!</h1>
-        {/* <button>Регистрация</button>  */}
+        <h2>Добро пожаловать в наше приложение!</h2>
+       
          <Link className="App-link" to={apiRoutes.users + '/add'}>
           Регистрация
          </Link>
-        <span className="App-logo-box">I love <img src={logo} className="App-logo" alt="React" title="React" />.js</span>
+        <span className="App-logo-box">I love read news!    <img src="logo.png" className="App-logo" alt="React" title="React" /></span>
         <p>Здесь можно посмотреть список новостей и пользователей с сервера, а так же, добавить или удалить новость!</p>
 
     </div>
 );
 
 export default MainPage;
+

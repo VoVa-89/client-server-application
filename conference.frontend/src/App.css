@@ -4,16 +4,17 @@
 }
 
 .App-logo-box {
+  margin: 1px 300px 10px;
   display: flex;
   align-items: center;
 }
 
 .App-header {
-  background-color: #222;
+  background-color: rgb(98, 100, 94);
   height: 70px;
   padding: 20px;
   text-align: center;
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 .App-title {
@@ -27,13 +28,14 @@
 .App-nav-bar {
   display: flex;
   margin-bottom: 30px;
+  background-color: rgb(98, 100, 94);
 }
 
 .App-nav-item {
   margin: 5px 10px;
   font-size: 1.2em;
   text-decoration: none;
-  color: #222;
+  color: #0cdf13;
 }
 
 .App-label-news-card {
@@ -42,7 +44,10 @@
 }
 
 .App-link {
-  color: inherit;
+  background-color: gren;
+  height: 20px;
+  padding: 10px 70px 70px 10px;
+  color: rgb(44, 42, 42);;
 }
 
 .App-label {
@@ -69,7 +74,7 @@
 .App-delete-btn {
   cursor: pointer;
   text-decoration: underline;
-  color: red;
+  color: rgb(0, 231, 8);
 }
 
 @keyframes App-logo-spin {

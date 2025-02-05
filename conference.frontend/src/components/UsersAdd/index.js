@@ -86,8 +86,6 @@ class UsersAdd extends Component {
 
     render() {
         const { login, name, password, messages, error } = this.state;
-        // const Head = (props) => {
-        // const {action} = props
         return (
             <form onSubmit={this.onSubmitHandler}>
 

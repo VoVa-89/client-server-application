@@ -1,7 +1,7 @@
 // Компонент на основе класса. Не имеет локального стейта или методов. Сделан именно на основе класса из-за необходимости работы с методом componentDidMount. 
 // Работает по аналогии с компонентом NewsList.
 //Список пользователей
-
+//npm install @userfront/react --save
 import React, { Component } from 'react';
 import UserCard from '../UserCard';
 import { Link } from 'react-router-dom';
